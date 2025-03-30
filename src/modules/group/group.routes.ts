@@ -1,6 +1,6 @@
 import express from 'express'
-import * as GroupController from '../controllers/group.controller'
-import { validateGroupCreation, validateGroupUpdate } from '../middlewares/validations/validation.middleware'
+import * as GroupController from './group.controller'
+import { validateGroupCreation, validateGroupUpdate } from '../../shared/middlewares/validations/validation.middleware'
 
 const router = express.Router()
 

@@ -1,6 +1,6 @@
 import express from 'express'
-import * as UserGroupController from '../controllers/user_group.controller'
-import { validateUserGroupOperation } from '../middlewares/validations/validation.middleware'
+import * as UserGroupController from './user-group.controller'
+import { validateUserGroupOperation } from '../../shared/middlewares/validations/validation.middleware'
 
 const router = express.Router()
 

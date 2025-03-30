@@ -1,10 +1,6 @@
-import { getConnection } from '../config/database'
+import { getConnection } from '../../shared/config/database'
 import { ResultSetHeader, RowDataPacket } from 'mysql2'
-
-interface UserGroup {
-  user_id: number
-  group_id: number
-}
+import { UserGroup } from './user-group.model'
 
 export const addUserToGroup = async (userGroup: UserGroup): Promise<boolean> => {
   const pool = await getConnection()

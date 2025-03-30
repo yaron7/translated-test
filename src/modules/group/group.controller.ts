@@ -1,7 +1,7 @@
-import { Request, Response } from 'express'
-import * as GroupService from '../services/group.service'
+import { NextFunction, Request, Response } from 'express'
+import * as GroupService from './group.service'
 
-export const createGroup = async (req: Request, res: Response): Promise<void> => {
+export const createGroup = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { name } = req.body
     const groupId = await GroupService.createGroup({ name })
@@ -12,7 +12,7 @@ export const createGroup = async (req: Request, res: Response): Promise<void> =>
   }
 }
 
-export const getGroupById = async (req: Request, res: Response): Promise<void> => {
+export const getGroupById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id } = req.params
     const group = await GroupService.getGroupById(parseInt(id, 10))
@@ -23,21 +23,23 @@ export const getGroupById = async (req: Request, res: Response): Promise<void> =
     }
   } catch (error: any) {
     console.error('Error getting group:', error)
-    res.status(500).json({ message: 'Failed to get group' })
+    // res.status(500).json({ message: 'Failed to get group' })
+    next(error)
   }
 }
 
-export const getAllGroups = async (req: Request, res: Response): Promise<void> => {
+export const getAllGroups = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const groups = await GroupService.getAllGroups()
     res.json(groups)
   } catch (error: any) {
     console.error('Error getting all groups:', error)
-    res.status(500).json({ message: 'Failed to get groups' })
+    // res.status(500).json({ message: 'Failed to get groups' })
+    next(error)
   }
 }
 
-export const updateGroup = async (req: Request, res: Response): Promise<void> => {
+export const updateGroup = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id } = req.params
     const { name } = req.body
@@ -49,11 +51,12 @@ export const updateGroup = async (req: Request, res: Response): Promise<void> =>
     }
   } catch (error: any) {
     console.error('Error updating group:', error)
-    res.status(500).json({ message: 'Failed to update group' })
+    // res.status(500).json({ message: 'Failed to update group' })
+    next(error)
   }
 }
 
-export const deleteGroup = async (req: Request, res: Response): Promise<void> => {
+export const deleteGroup = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id } = req.params
     const deleted = await GroupService.deleteGroup(parseInt(id, 10))
@@ -64,6 +67,7 @@ export const deleteGroup = async (req: Request, res: Response): Promise<void> =>
     }
   } catch (error: any) {
     console.error('Error deleting group:', error)
-    res.status(500).json({ message: 'Failed to delete group' })
+    // res.status(500).json({ message: 'Failed to delete group' })
+    next(error)
   }
 }

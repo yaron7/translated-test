@@ -1,10 +1,6 @@
-import { getConnection } from '../config/database'
+import { getConnection } from '../../shared/config/database'
 import { RowDataPacket, ResultSetHeader } from 'mysql2'
-
-export interface Group {
-  id?: number
-  name: string
-}
+import { Group } from './group.model'
 
 interface GroupRow extends Group, RowDataPacket {}
 

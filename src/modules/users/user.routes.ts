@@ -1,10 +1,10 @@
 import express from 'express'
-import * as UserController from '../controllers/user.controller'
+import * as UserController from './user.controller'
 import {
   validateUserCreation,
   validateUserUpdate,
   validatePagination
-} from '../middlewares/validations/validation.middleware'
+} from '../../shared/middlewares/validations/validation.middleware'
 
 const router = express.Router()
 

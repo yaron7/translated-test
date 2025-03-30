@@ -1,19 +1,6 @@
-import { getConnection } from '../config/database'
+import { getConnection } from '../../shared/config/database'
 import { ResultSetHeader, RowDataPacket } from 'mysql2'
-
-export enum Sex {
-  Male = 'male',
-  Female = 'female',
-  Other = 'other'
-}
-
-export interface User {
-  id?: number
-  name: string
-  surname: string
-  birth_date: Date
-  sex: Sex
-}
+import { User } from './user.model'
 
 interface UserRow extends User, RowDataPacket {}
 

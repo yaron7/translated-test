@@ -1,8 +1,7 @@
 import express, { Express } from 'express'
-import { port } from './config'
-import routes from './routes'
-import { errorHandler } from './middlewares/errors/error.handler'
-import createDatabaseAndTables from './db/setup'
+import { port } from './shared/config'
+import { errorHandler } from './shared/middlewares/errors/error.handler'
+import createDatabaseAndTables from './shared/db/setup'
 import morgan from 'morgan'
 import helmet from 'helmet'
 import cors from 'cors'
@@ -11,6 +10,9 @@ import compression from 'compression'
 import { StatusCodes } from 'http-status-codes'
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import userRoutes from './modules/users/user.routes'
+import groupRoutes from './modules/group/group.routes'
+import userGroupRoutes from './modules/user-group/user-group.routes'
 
 const app: Express = express()
 
@@ -53,7 +55,9 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 // Routes
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use('/api', routes)
+app.use('/users', userRoutes)
+app.use('/groups', groupRoutes)
+app.use('/user-groups', userGroupRoutes)
 
 // Error Handling Middleware
 app.use(errorHandler)
